@@ -63,13 +63,13 @@ class NotificationReaderService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         Log.i("Awake now", " notif posted packageName " + sbn.packageName)
-
+        val appPackageList = Util.getListOfAppNamesFromSharedPref(context)
+        Log.i("Awake now", " notif posted appNamelist $appPackageList")
         val notificationCode = matchNotificationCode(sbn)
         if ((notificationCode != InterceptedNotificationCode.AWAKE_NOW_CODE)
-            && (sbn.packageName.equals(ApplicationPackageNames.SLACK_PACK_NAME) || sbn.packageName.equals(
-                ApplicationPackageNames.MICROSOFT_TEAMS_PACK_NAME
-            ))//TODO : remove amazon from here after testing
-        ) {
+            && appPackageList.contains(sbn.packageName)
+        )//TODO : remove amazon from here after testing
+        {
             val intent = Intent("com.bewtechnologies.awakenow")
             intent.putExtra("Notification Code", sbn.packageName)
 

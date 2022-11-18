@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.content.*
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.MATCH_ALL
 import android.os.Build
 import android.provider.Settings
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var enableNotificationListenerAlertDialog: AlertDialog
     private val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
     private lateinit var imageChangeBroadcastReceiver: ImageChangeBroadcastReceiver
     private var applicationDetailsList: ArrayList<ApplicationDetailsObject> = ArrayList()
@@ -34,6 +36,13 @@ class MainActivity : AppCompatActivity() {
         val applicationNamesAdapter = ApplicationNamesAdapter(applicationDetailsList)
         recyclerView.adapter = applicationNamesAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // If the user did not turn the notification listener service on we prompt him to do so
+        if (!isNotificationServiceEnabled()) {
+            enableNotificationListenerAlertDialog = buildNotificationServiceAlertDialog()
+            enableNotificationListenerAlertDialog.show()
+        }
+
         /*var messaginAppIntent = Intent(Intent.ACTION_SEND)
         messaginAppIntent.type = "text/plain"
         var applicationList =
@@ -69,7 +78,8 @@ class MainActivity : AppCompatActivity() {
             forEach {
                 //to get list of apps uncomment this
                 //packageList.add(it.activityInfo.packageName)
-                val applicationDetailsObject = ApplicationDetailsObject(appName = it.activityInfo.loadLabel(applicationContext.packageManager).toString(),appImage =it.activityInfo.loadIcon(applicationContext.packageManager), appPackageName = it.activityInfo.packageName )
+                val appName = applicationContext.packageManager.getApplicationLabel(applicationContext.packageManager.getApplicationInfo(it.activityInfo.packageName, PackageManager.GET_META_DATA))
+                val applicationDetailsObject = ApplicationDetailsObject(appName = appName.toString(),appImage =it.activityInfo.loadIcon(applicationContext.packageManager), appPackageName = it.activityInfo.packageName )
                 applicationDetailsList.add(applicationDetailsObject)
                 //to get icons of the list of apps
                 packageList.add(it.activityInfo.loadIcon(applicationContext.packageManager).toString())
