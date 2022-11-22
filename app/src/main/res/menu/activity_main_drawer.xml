@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single"
+
+        >
+
+        <!-- <item
+             android:id="@+id/nav_rate"
+             android:icon="@drawable/icn_rating"
+             android:title="Rate the app" />-->
+
+
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@android:drawable/ic_menu_share"
+            android:title="Share the app" />
+
+
+      <!--  <item
+            android:id="@+id/nav_website"
+            android:icon="@drawable/wc_launcher"
+            android:title="Writing Challenge"
+
+            />
+
+        <item
+            android:id="@+id/nav_writersdict"
+            android:icon="@drawable/writersdict_ic_launcher"
+            android:title="Writer\'s Dictionary"
+
+            />
+-->
+
+
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@android:drawable/stat_notify_chat"
+            android:title="Contact Us (Feedback)"
+
+            />
+
+        <!-- <item
+             android:id="@+id/nav_dynamo"
+             android:icon="@drawable/icn_contact_us"
+             android:title="Share Dylinks"
+             />-->
+
+    </group>
+</menu>

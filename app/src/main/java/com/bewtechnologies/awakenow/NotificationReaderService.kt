@@ -117,14 +117,13 @@ class NotificationReaderService : NotificationListenerService() {
         val builder = NotificationCompat.Builder(this, "awakeNow_serviceChanel")
 
         builder.setContentTitle(
-            StringBuilder("Awake now").append(" service is running").toString()
+            StringBuilder("Awake now").append(" is listening.").toString()
         )
             .setTicker(StringBuilder("awake now").append("service is running").toString())
-            .setContentText("Got $packageName. Touch to open app.${Random.nextInt()}") //                    , swipe down for more options.
+            .setContentText("Got message from $packageName. Touch to open app.") //                    , swipe down for more options.
             .setSmallIcon(R.drawable.ic_btn_speak_now)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
-            .setOngoing(true)
         if (iconNotification != null) {
             builder.setLargeIcon(Bitmap.createScaledBitmap(iconNotification!!, 128, 128, false))
         }
@@ -133,6 +132,11 @@ class NotificationReaderService : NotificationListenerService() {
         setAlarm()
         mNotificationManager!!.notify(mNotificationId, notification)
         //startForeground(mNotificationId, notification)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mNotificationManager?.cancel(mNotificationId)
     }
 
     private fun setAlarm() {

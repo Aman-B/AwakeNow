@@ -106,7 +106,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .addAction(R.drawable.ic_input_delete, "Cancel Alarm", cancelAlarmPendingIntent)
-            .setOngoing(false)
+            .setOngoing(true)
         if (iconNotification != null) {
             builder.setLargeIcon(Bitmap.createScaledBitmap(iconNotification!!, 128, 128, false))
         }
