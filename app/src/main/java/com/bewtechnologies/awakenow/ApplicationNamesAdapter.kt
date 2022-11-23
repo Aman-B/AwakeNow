@@ -71,6 +71,7 @@ class ApplicationNamesAdapter(private val applicationDetailsList: ArrayList<Appl
                     applicationDetailsObject.appPackageName,
                     context!!
                 )
+                appPackageList.add(applicationDetailsObject.appPackageName.toString())
                 alarmSwitch.text = "Listening"
                 alarmSwitch.setBackgroundColor(context?.getColor(R.color.listening_color)!!)
             } else {
@@ -80,7 +81,9 @@ class ApplicationNamesAdapter(private val applicationDetailsList: ArrayList<Appl
                     applicationDetailsObject.appPackageName,
                     context!!
                 )
+                appPackageList.remove(applicationDetailsObject.appPackageName.toString())
                 alarmSwitch.text = "Listen"
+                alarmSwitch.setBackgroundColor(context?.getColor(R.color.white)!!)
                 alarmSwitch.setTextColor(context?.getColor(R.color.black)!!)
             }
         }
