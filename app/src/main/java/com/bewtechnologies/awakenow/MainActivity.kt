@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var giveNotificationPermissionButton: Button? = null
     private lateinit var enableNotificationListenerAlertDialog: AlertDialog
     private val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
-    private lateinit var imageChangeBroadcastReceiver: ImageChangeBroadcastReceiver
     private var applicationDetailsList: ArrayList<ApplicationDetailsObject> = ArrayList()
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -172,7 +171,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(imageChangeBroadcastReceiver)
     }
 
 
