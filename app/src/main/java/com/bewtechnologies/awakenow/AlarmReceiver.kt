@@ -63,7 +63,7 @@ class AlarmReceiver : BroadcastReceiver() {
     private fun showNotification(context: Context?) {
         Log.i("Awake now", " alarm receive show notification")
 
-        val intentMainLanding = Intent(context, MainActivity::class.java)
+        val intentMainLanding = Intent(context, CancelAlarmActivity::class.java)
         //put sound value
         intentMainLanding.putExtra("sound", "yes")
 

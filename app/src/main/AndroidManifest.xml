@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bewtechnologies.awakenow" >
+    package="com.bewtechnologies.awakenow">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -20,7 +20,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AwakeNow" >
+        android:theme="@style/Theme.AwakeNow">
+        <activity
+            android:name=".CancelAlarmActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity2"
             android:exported="false"
@@ -28,7 +31,7 @@
             android:theme="@style/Theme.AwakeNow.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +43,7 @@
             android:name=".NotificationReaderService"
             android:exported="false"
             android:label="NotificationReaderService"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>

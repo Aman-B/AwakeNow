@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="listening_color">#1AE3A3</color>
     <color name="listening_text_color">#FFFFFF</color>
-    <color name="text_color">@color/black</color>
+    <color name="text_color">@color/white</color>
 
 </resources>
