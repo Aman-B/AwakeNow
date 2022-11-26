@@ -90,15 +90,15 @@ class NotificationReaderService : NotificationListenerService() {
             .setUsage(AudioAttributes.USAGE_ALARM)
             .build()*/
 
-        val intentMainLanding = Intent(this, MainActivity::class.java)
+        val intentMainLanding = Intent(context, MainActivity::class.java)
         //put sound value
         intentMainLanding.putExtra("sound", "yes")
 
         val pendingIntent =
-            PendingIntent.getActivity(this, 0, intentMainLanding, 0)
+            PendingIntent.getActivity(context, 0, intentMainLanding, 0)
         if (mNotificationManager == null) {
             mNotificationManager =
-                this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         }
         assert(mNotificationManager != null)
         mNotificationManager?.createNotificationChannelGroup(
@@ -114,7 +114,7 @@ class NotificationReaderService : NotificationListenerService() {
         mNotificationManager?.createNotificationChannel(notificationChannel)
 
 
-        val builder = NotificationCompat.Builder(this, "awakeNow_serviceChanel")
+        val builder = NotificationCompat.Builder(context, "awakeNow_serviceChanel")
 
         builder.setContentTitle(
             StringBuilder("Awake now").append(" is listening.").toString()
