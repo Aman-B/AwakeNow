@@ -29,7 +29,7 @@ class CancelAlarmActivity : AppCompatActivity() {
             context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
         val alarmReceiverIntent = Intent(context, AlarmReceiver::class.java)
         val alarmIntent = alarmReceiverIntent.let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
         stopAlarm(context)
         alarmIntent.cancel()

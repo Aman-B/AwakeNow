@@ -95,7 +95,7 @@ class NotificationReaderService : NotificationListenerService() {
         intentMainLanding.putExtra("sound", "yes")
 
         val pendingIntent =
-            PendingIntent.getActivity(context, 0, intentMainLanding, 0)
+            PendingIntent.getActivity(context, 0, intentMainLanding, PendingIntent.FLAG_IMMUTABLE)
         if (mNotificationManager == null) {
             mNotificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -146,7 +146,7 @@ class NotificationReaderService : NotificationListenerService() {
 
         alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
         /*if (alarmIntent == null) {
             alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
@@ -185,7 +185,7 @@ class NotificationReaderService : NotificationListenerService() {
         intentMainLanding.putExtra("sound", "yes")
 
         val pendingIntent =
-            PendingIntent.getActivity(context, 0, intentMainLanding, 0)
+            PendingIntent.getActivity(context, 0, intentMainLanding, PendingIntent.FLAG_IMMUTABLE)
         if (mNotificationManager == null) {
             mNotificationManager =
                 context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -207,7 +207,7 @@ class NotificationReaderService : NotificationListenerService() {
 
         val alarmReceiverIntent = Intent(context, CancelAlarmReceiver::class.java)
         alarmIntent = alarmReceiverIntent.let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
 
         // Setup Ringtone & Vibrate

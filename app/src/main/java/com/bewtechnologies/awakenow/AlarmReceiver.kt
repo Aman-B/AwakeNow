@@ -29,7 +29,7 @@ class AlarmReceiver : BroadcastReceiver() {
                     context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
                 val alarmReceiverIntent = Intent(context, AlarmReceiver::class.java)
                 val alarmIntent = alarmReceiverIntent.let { intent ->
-                    PendingIntent.getBroadcast(context, 0, intent, 0)
+                    PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
                 }
                 stopAlarm(context)
                 alarmIntent.cancel()
@@ -68,7 +68,7 @@ class AlarmReceiver : BroadcastReceiver() {
         intentMainLanding.putExtra("sound", "yes")
 
         val pendingIntent =
-            PendingIntent.getActivity(context, 0, intentMainLanding, 0)
+            PendingIntent.getActivity(context, 0, intentMainLanding, PendingIntent.FLAG_IMMUTABLE)
         if (mNotificationManager == null) {
             mNotificationManager =
                 context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -90,7 +90,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val cancelAlarmIntent = Intent(context, CancelAlarmReceiver::class.java)
         cancelAlarmPendingIntent = cancelAlarmIntent.let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
 
         // Setup Ringtone & Vibrate
