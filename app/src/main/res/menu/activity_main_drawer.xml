@@ -10,7 +10,10 @@
              android:icon="@drawable/icn_rating"
              android:title="Rate the app" />-->
 
-
+        <item
+            android:id="@+id/how_it_works"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="How does this work?" />
 
         <item
             android:id="@+id/nav_share"

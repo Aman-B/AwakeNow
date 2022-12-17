@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AwakeNow">
         <activity
+            android:name=".howitworks.HowItWorksActivity"
+            android:exported="false" />
+        <activity
             android:name=".CancelAlarmActivity"
             android:exported="false" />
         <activity

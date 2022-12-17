@@ -3,6 +3,7 @@ package com.bewtechnologies.awakenow
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.MATCH_ALL
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -12,23 +13,17 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import androidx.appcompat.widget.Toolbar
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
+import com.bewtechnologies.awakenow.howitworks.HowItWorksActivity
 import com.google.android.material.navigation.NavigationView
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -114,8 +109,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+            ), drawerLayout
+        )
     }
 
     private fun setApplicationList() {
@@ -243,7 +241,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var menuItemID = item.getItemId()
-        when(menuItemID) {
+        when (menuItemID) {
+            R.id.how_it_works -> {
+                val howItWorksIntent = Intent(this, HowItWorksActivity::class.java)
+                startActivity(howItWorksIntent)
+            }
             R.id.nav_share -> {
                 val textToShare =
                     "Check out this amazing app for setting alarms for important messages. \n(Download here: https://play.google.com/store/apps/details?id=com.bewtechnologies.awakenow )"
@@ -254,12 +256,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 sendIntent.type = "text/plain"
                 startActivity(Intent.createChooser(sendIntent, "Share the app!"))
             }
-            
+
             R.id.nav_contact_us -> {
                 openEmail("Awake Now! - Feedback");
             }
         }
-        
+
         return true
     }
 
@@ -269,7 +271,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         /* Fill it with Data */
         emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf("bewtechnologies@gmail.com"));
+        emailIntent.putExtra(
+            android.content.Intent.EXTRA_EMAIL,
+            arrayOf("bewtechnologies@gmail.com")
+        );
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hello!");
 

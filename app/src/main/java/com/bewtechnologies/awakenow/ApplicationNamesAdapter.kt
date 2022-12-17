@@ -49,7 +49,7 @@ class ApplicationNamesAdapter(private val applicationDetailsList: ArrayList<Appl
 
         val alarmSwitch = applicationAdapterHolder.alarmListenButton
 
-        //if notification reader is enabled for this app, show switch enabled
+        //if alarm is activated for this app, show button text as alarm activated.
         if (appPackageList.contains(applicationDetailsObject.appPackageName.toString())) {
             Log.i(
                 "AppNamesAdapter ",
@@ -59,30 +59,36 @@ class ApplicationNamesAdapter(private val applicationDetailsList: ArrayList<Appl
                     applicationDetailsObject.appPackageName.toString()
                 } pos ${index}"
             )
-            alarmSwitch.text = "Listening"
+            alarmSwitch.text = context?.getString(R.string.alarm_activated_label)
             alarmSwitch.setBackgroundColor(context?.getColor(R.color.listening_color)!!)
         }
 
         alarmSwitch.setOnClickListener {
-            if (alarmSwitch.text.toString() == "Listen") {
+            //if it is activate alarm
+            if (alarmSwitch.text.toString() == "Activate Alarm") {
                 Log.i("AppNamesAdapter", " checked checkbox")
 
                 Util.saveInSharedPref(
                     applicationDetailsObject.appPackageName,
                     context!!
                 )
+                //add to alarm list
                 appPackageList.add(applicationDetailsObject.appPackageName.toString())
-                alarmSwitch.text = "Listening"
+                //change text to alarm activated
+                alarmSwitch.text = context?.getString(R.string.alarm_activated_label)
                 alarmSwitch.setBackgroundColor(context?.getColor(R.color.listening_color)!!)
             } else {
+                //if alarm is already activated.
                 Log.i("AppNamesAdapter", " unchecked checkbox")
 
                 Util.removeFromSharedPref(
                     applicationDetailsObject.appPackageName,
                     context!!
                 )
+                //remove from alarm list
                 appPackageList.remove(applicationDetailsObject.appPackageName.toString())
-                alarmSwitch.text = "Listen"
+                //change text to activate alarm
+                alarmSwitch.text = context!!.getString(R.string.activate_alarm_label)
                 alarmSwitch.setBackgroundColor(context?.getColor(R.color.white)!!)
                 alarmSwitch.setTextColor(context?.getColor(R.color.black)!!)
             }

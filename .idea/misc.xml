@@ -5,15 +5,17 @@
       <map>
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/drawable/alarm_clock_foreground.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/drawable/ic_launcher.xml" value="0.559375" />
+        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/drawable/side_nav_bar.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/activity_cancel_alarm.xml" value="0.1" />
+        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/activity_how_it_works.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/app_bar_main2.xml" value="0.1" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/content_main2.xml" value="0.1" />
-        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/custom_recyclerview_row.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
+        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/custom_recyclerview_row.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/nav_header_main.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/menu/activity_main_drawer.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/amanb/Documents/amanDocs/Android Apps/AwakeNow/app/src/main/res/mipmap-anydpi-v26/alarm_clock.xml" value="0.19166666666666668" />
