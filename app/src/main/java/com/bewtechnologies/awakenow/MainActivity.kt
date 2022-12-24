@@ -1,5 +1,6 @@
 package com.bewtechnologies.awakenow
 
+import android.app.NotificationManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.MATCH_ALL
@@ -180,19 +181,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun isNotificationServiceEnabled(): Boolean {
         val pkgName = packageName
-        val flat: String = Settings.Secure.getString(
-            contentResolver,
+        val flat: String? = Settings.Secure.getString(
+            this.contentResolver,
             ENABLED_NOTIFICATION_LISTENERS
         )
-        if (!TextUtils.isEmpty(flat)) {
-            val names = flat.split(":").toTypedArray()
-            for (i in names.indices) {
-                val cn = ComponentName.unflattenFromString(names[i])
-                if (cn != null) {
-                    if (TextUtils.equals(pkgName, cn.packageName)) {
-                        return true
+        if (flat != null) {
+            if (!TextUtils.isEmpty(flat)) {
+                val names = flat.split(":").toTypedArray()
+                for (i in names.indices) {
+                    val cn = ComponentName.unflattenFromString(names[i])
+                    if (cn != null) {
+                        if (TextUtils.equals(pkgName, cn.packageName)) {
+                            return true
+                        }
                     }
                 }
+            }
+        } else {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                (this!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).isNotificationListenerAccessGranted(
+                    ComponentName(this, NotificationReaderService::class.java)
+                )
+            } else {
+                false
             }
         }
         return false
