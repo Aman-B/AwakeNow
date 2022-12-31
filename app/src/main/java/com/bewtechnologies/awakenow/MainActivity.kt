@@ -2,8 +2,8 @@ package com.bewtechnologies.awakenow
 
 import android.app.NotificationManager
 import android.content.*
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.MATCH_ALL
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -118,33 +118,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setApplicationList() {
-        var messaginAppIntent = Intent(Intent.ACTION_SEND)
-        messaginAppIntent.type = "text/plain"
-        var applicationList =
-            applicationContext.packageManager
-                .queryIntentActivities(messaginAppIntent, MATCH_ALL)
+        val packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
 
-        var packageList: ArrayList<String> = ArrayList()
-        applicationList.apply {
-            forEach {
-                //to get list of apps uncomment this
-                //packageList.add(it.activityInfo.packageName)
+        for (packageInfo in packages) {
+            if (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM != 1) {
+                //enter what you want to do here
+            }
+        }
+        packages.onEach {
+            Log.i("awake now set : ", "" + it)
+            if (it.flags and ApplicationInfo.FLAG_SYSTEM != 1) {
                 val appName = applicationContext.packageManager.getApplicationLabel(
                     applicationContext.packageManager.getApplicationInfo(
-                        it.activityInfo.packageName,
+                        it.packageName,
                         PackageManager.GET_META_DATA
                     )
                 )
                 val applicationDetailsObject = ApplicationDetailsObject(
                     appName = appName.toString(),
-                    appImage = it.activityInfo.loadIcon(applicationContext.packageManager),
-                    appPackageName = it.activityInfo.packageName
+                    appImage = it.loadIcon(applicationContext.packageManager),
+                    appPackageName = it.packageName
                 )
                 applicationDetailsList.add(applicationDetailsObject)
-                //to get icons of the list of apps
-                packageList.add(
-                    it.activityInfo.loadIcon(applicationContext.packageManager).toString()
-                )
+                applicationDetailsList.sortBy { it -> it.appName }
             }
         }
     }
