@@ -20,15 +20,11 @@
             android:name=".howitworks.HowItWorksActivity"
             android:exported="false" />
         <activity
-            android:name=".CancelAlarmActivity"
+            android:name=".activity.CancelAlarmActivity"
             android:exported="false" />
+
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.AwakeNow.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +34,7 @@
         </activity>
 
         <service
-            android:name=".NotificationReaderService"
+            android:name=".service.NotificationReaderService"
             android:exported="false"
             android:label="NotificationReaderService"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
@@ -47,11 +43,11 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".AlarmReceiver" />
-        <receiver android:name=".CancelAlarmReceiver" />
+        <receiver android:name=".receiver.AlarmReceiver" />
+        <receiver android:name=".receiver.CancelAlarmReceiver" />
 
         <service
-            android:name=".AlarmRingtoneService"
+            android:name=".service.AlarmRingtoneService"
             android:enabled="true" />
     </application>
 
