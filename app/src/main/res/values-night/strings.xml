@@ -3,4 +3,5 @@
     <string name="alarm_activated_label">Alarm Activated</string>
     <string name="activate_alarm_label">Activate Alarm</string>
     <string name="how_it_works_text">Steps to follow : \n \n 1. Install the app.\n \n 2. Give it notification permission. (We would use this to see if notification from your selected app shows up.) \n \n 3. Open the app. \n \n 4. Select the app\'s whose notification you want to play alarm for. (Say Slack, MS Teams etc) \n \n 5. That\'s it. Take a nap or walk, whenever any notification from your selected app comes, we will play an alarm. \n \n You will never miss an important message. \n \n Relax and enjoy. :)</string>
+    <string name="keywords_like_names_ankur_deepti_etc_or_other_keywords_like_work_group_office_etc">Keywords like names Ankur, Deepti etc. Or other keywords like Work Group, Office etc.</string>
 </resources>

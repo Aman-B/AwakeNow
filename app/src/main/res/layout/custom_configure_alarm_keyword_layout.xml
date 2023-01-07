@@ -18,7 +18,7 @@
         android:background="@drawable/edittext_background"
         android:ems="10"
         android:gravity="top"
-        android:hint="Keywords like names John, Ankur etc. Or other keywords like Work Group, Office etc."
+        android:hint="@string/keywords_like_names_ankur_deepti_etc_or_other_keywords_like_work_group_office_etc"
         android:inputType="textMultiLine|textCapSentences"
         android:maxLength="240"
         android:paddingLeft="10dp"

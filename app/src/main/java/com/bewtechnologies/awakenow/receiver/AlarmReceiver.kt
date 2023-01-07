@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.bewtechnologies.awakenow.activity.CancelAlarmActivity
 import com.bewtechnologies.awakenow.service.AlarmRingtoneService
 
@@ -51,6 +52,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 //cancel existing ringtoneService if any
                 cancelAlarmRingtoneService(context)
                 startAlarm(context)
+                //show notification
                 showNotification(context)
             }
 
@@ -100,18 +102,30 @@ class AlarmReceiver : BroadcastReceiver() {
         builder.setContentTitle(
             StringBuilder("Awake now").append(" service is running").toString()
         )
-            .setTicker(StringBuilder("awake now").append("service is running").toString())
+            .setTicker(StringBuilder("Awake Now! App").append(" alarm").toString())
             .setContentText("Turn off alarm") // swipe down for more options.
+            .setFullScreenIntent(pendingIntent, true)
             .setSmallIcon(R.drawable.ic_lock_idle_alarm)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setCategory(Notification.CATEGORY_ALARM)
             .setContentIntent(pendingIntent)
             .addAction(R.drawable.ic_input_delete, "Cancel Alarm", cancelAlarmPendingIntent)
             .setOngoing(true)
+            .setAutoCancel(false)
+            .setDefaults(Notification.FLAG_ONGOING_EVENT)
+            .setColorized(true).color = ContextCompat.getColor(context, R.color.holo_purple)
         if (iconNotification != null) {
             builder.setLargeIcon(Bitmap.createScaledBitmap(iconNotification!!, 128, 128, false))
         }
         notification = builder.build()
         mNotificationManager!!.notify(mNotificationId, notification)
+        //start cancel alarm activity
+        //not yet implemented
+        startCancelAlarmActivity()
+    }
+
+    private fun startCancelAlarmActivity() {
+        //to be implemented
     }
 
     private fun cancelAlarmRingtoneService(context: Context?) {

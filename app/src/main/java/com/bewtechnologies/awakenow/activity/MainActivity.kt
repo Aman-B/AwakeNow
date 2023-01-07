@@ -93,21 +93,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun setApplicationList() {
         val packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
         packages.onEach {
-            Log.i("awake now set : ", "" + it)
-            if (it.flags and ApplicationInfo.FLAG_SYSTEM != 1) {
-                val appName = applicationContext.packageManager.getApplicationLabel(
-                    applicationContext.packageManager.getApplicationInfo(
-                        it.packageName,
-                        PackageManager.GET_META_DATA
+            Log.i("awake now set : ", "" + it.packageName + " current " + this.packageName)
+            if ((it.flags and ApplicationInfo.FLAG_SYSTEM) != 1 || ((it.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0)) {
+                if (it.packageName.equals(this.packageName)) {
+                    Log.i("awake now got", "" + it.packageName + " current " + this.packageName)
+                } else {
+                    val appName = applicationContext.packageManager.getApplicationLabel(
+                        applicationContext.packageManager.getApplicationInfo(
+                            it.packageName,
+                            PackageManager.GET_META_DATA
+                        )
                     )
-                )
-                val applicationDetailsObject = ApplicationDetailsObject(
-                    appName = appName.toString(),
-                    appImage = it.loadIcon(applicationContext.packageManager),
-                    appPackageName = it.packageName
-                )
-                applicationDetailsList.add(applicationDetailsObject)
-                applicationDetailsList.sortBy { it -> it.appName }
+                    val applicationDetailsObject = ApplicationDetailsObject(
+                        appName = appName.toString(),
+                        appImage = it.loadIcon(applicationContext.packageManager),
+                        appPackageName = it.packageName
+                    )
+                    applicationDetailsList.add(applicationDetailsObject)
+                    applicationDetailsList.sortBy { it -> it.appName }
+                }
             }
         }
     }

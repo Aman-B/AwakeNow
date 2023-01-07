@@ -56,7 +56,7 @@ class NotificationReaderService : NotificationListenerService() {
                 //show notification with alarm
                 showNotificationWithAlarm(sbn.packageName)
                 sendBroadcast(intent)
-            } else if (textToLookFor.isEmpty()) {
+            } else if (textToLookFor.trim().isEmpty()) {
                 val intent = Intent("com.bewtechnologies.awakenow")
                 intent.putExtra("Notification Code", sbn.packageName)
                 //show notification with alarm
@@ -70,18 +70,75 @@ class NotificationReaderService : NotificationListenerService() {
         textToLookFor: String,
         sbn: StatusBarNotification
     ): Boolean {
+        // Match with EXTRA_TITLE,EXTRA_TEXT,EXTRA_SUB_TEXT,EXTRA_REMOTE_INPUT_HISTORY(not added yet),EXTRA_INFO_TEXT,EXTRA_SUMMARY_TEXT,EXTRA_BIG_TEXT
         val textToLookForSplit = textToLookFor.split(" ")
-        val notificationTextSplit =
+
+        val notificationExtraTextSplit =
             sbn.notification.extras.getCharSequence(NotificationCompat.EXTRA_TEXT)
                 .toString().split(" ")
+
+        val notificationExtraTitleSplit =
+            sbn.notification.extras.getCharSequence(NotificationCompat.EXTRA_TITLE)
+                .toString().split(" ")
+
+        val notificationExtraSubTextSplit =
+            sbn.notification.extras.getCharSequence(NotificationCompat.EXTRA_SUB_TEXT)
+                .toString().split(" ")
+
+        val notificationExtraInfoTextSplit =
+            sbn.notification.extras.getCharSequence(NotificationCompat.EXTRA_INFO_TEXT)
+                .toString().split(" ")
+
+        val notificationExtraSummaryTextSplit =
+            sbn.notification.extras.getCharSequence(NotificationCompat.EXTRA_SUMMARY_TEXT)
+                .toString().split(" ")
+
         Log.i(
             "awake now ",
-            "ttLSplit " + textToLookForSplit + " notifSplit " + notificationTextSplit
+            "ttLSplit $textToLookForSplit notifSplit"
         )
         textToLookForSplit.forEach {
-            notificationTextSplit.forEach { notificationTextPart ->
-                Log.i("awake now ", "ttLSplit " + it + " notifSplit " + notificationTextPart)
-
+            notificationExtraTitleSplit.forEach { notificationTextPart ->
+                if (it.equals(notificationTextPart, ignoreCase = true) || (it.contains(
+                        notificationTextPart,
+                        ignoreCase = true
+                    ))
+                ) {
+                    //we have a match
+                    return true
+                }
+            }
+            notificationExtraTextSplit.forEach { notificationTextPart ->
+                if (it.equals(notificationTextPart, ignoreCase = true) || (it.contains(
+                        notificationTextPart,
+                        ignoreCase = true
+                    ))
+                ) {
+                    //we have a match
+                    return true
+                }
+            }
+            notificationExtraSubTextSplit.forEach { notificationTextPart ->
+                if (it.equals(notificationTextPart, ignoreCase = true) || (it.contains(
+                        notificationTextPart,
+                        ignoreCase = true
+                    ))
+                ) {
+                    //we have a match
+                    return true
+                }
+            }
+            notificationExtraInfoTextSplit.forEach { notificationTextPart ->
+                if (it.equals(notificationTextPart, ignoreCase = true) || (it.contains(
+                        notificationTextPart,
+                        ignoreCase = true
+                    ))
+                ) {
+                    //we have a match
+                    return true
+                }
+            }
+            notificationExtraSummaryTextSplit.forEach { notificationTextPart ->
                 if (it.equals(notificationTextPart, ignoreCase = true) || (it.contains(
                         notificationTextPart,
                         ignoreCase = true
@@ -132,7 +189,7 @@ class NotificationReaderService : NotificationListenerService() {
             StringBuilder("Awake now").append(" is up and running.").toString()
         )
             .setTicker(StringBuilder("Awake now").append("is up and running").toString())
-            .setContentText("Got message from $packageName. Touch to open Awake Now! app.") //                    , swipe down for more options.
+            .setContentText("Got message from $packageName. Touch to open Awake Now! app.") // swipe down for more options.
             .setSmallIcon(R.drawable.ic_lock_idle_alarm)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
